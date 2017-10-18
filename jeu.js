@@ -4,21 +4,23 @@ var nbTour = 0;
 var nbTourReste = 10;
 
 function deviner(tours) {
-    while ((nbProposition ==! nbMystere) || (nbTour < 11)) {
+    for (var i = 1; i<11; i++) {
         var nbProposition = prompt('Devinez le nombre compris en 0 et 100 !'+' Tours restants : ' + nbTourReste);
         if (nbProposition > nbMystere) {
-            alert("C'est moins !")
-            nbTour++;
-            nbTourReste --;
+            alert("C'est moins !");
+            nbTourReste = (10 - i);
         }
         else if (nbProposition < nbMystere){
-            alert("C'est plus !")
-            nbTour++;
-            nbTourReste --;
+            alert("C'est plus !");
+            nbTourReste = (10 - i);
+        }
+        else if (nbProposition == nbMystere) {
+            alert("Gagné ! Le nombre mystère est "+nbMystere);
+            break;
         }
         else {
-            alert("Gagné ! Le nombre mystère est "+nbMystere);
+            alert("Tricher, c'est mal !")
         }
-        
-    }      
+    }        
 }
+
