@@ -1,1 +1,0 @@
-<input type="button" value="Jouer !" onclick="deviner(nbTour);" name="" id="">
