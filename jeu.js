@@ -2,29 +2,56 @@ var nbMystere = Math.floor(Math.random()*100);
 var nbTour = 0;
 var nbTourReste = 10;
 
-function deviner(tours) {
-    var nbProposition;
-    for (var i = 1; i<11; i++) {
-        nbProposition = prompt('Devinez le nombre compris en 0 et 100 !'+' Tours restants : ' + nbTourReste);
-        var verifNombre = isNaN(nbProposition);
-        nbTourReste = (10 - i);
-        console.log (verifNombre);
-        if (verifNombre == false) {
-            if (nbProposition > nbMystere){
-                alert("C'est moins !");
-            }
-            else if (nbProposition < nbMystere){
-                alert("C'est plus !");
-            }
-            else if (nbProposition == nbMystere) {
-                alert("Gagné ! Le nombre mystère est "+nbMystere+". Tu as trouvé en "+i+" tour(s).");
-                break;
-            }
-        }
-        
-        else {
-            alert("C'est mal de tricher ! Il faut entrer un nombre.");         
-        }
-    }        
+var startButton = document.getElementById('startButton');
+var submitButton = document.getElementById('submitButton');
+
+var proposition = document.getElementById('proposition');
+var regleJeu = document.getElementById('regleJeu');
+var indiceJeu = document.getElementById('indicesJeu');
+
+function modifForm() {
+    
+    startButton.type = "hidden";
+    submitButton.type ="button";
+    proposition.type = "text";
+    regleJeu.innerHTML = "Devinez le nombre mystère entre 0 et 100. Entrez votre nombre. <br> Bonne chance !";
 }
 
+function reinit() {
+    startButton.type = "button";
+    startButton.value ="Rejouer";
+    submitButton.type ="hidden";
+    proposition.value = "";
+    proposition.type ="hidden";
+    nbTourReste = 10;
+    regleJeu.innerHTML = "Devinez le nombre mystère entre 0 et 100. Entrez votre nombre. <br> Bonne chance !";
+}
+
+function deviner() {
+    var nbProposition;
+    regleJeu.innerHTML = "Devinez le nombre mystère entre 0 et 100. Entrez votre nombre. <br> Bonne chance  ! <br><br> Tours restants : " + nbTourReste;        
+    nbProposition = proposition.value;
+    var verifNombre = isNaN(nbProposition);
+    nbTourReste --;
+    if (verifNombre == false) {
+        if (nbProposition > nbMystere){
+            indiceJeu.innerHTML = "Indice : C'est moins !";
+        }
+        else if (nbProposition < nbMystere){
+            indiceJeu.innerHTML = "Indice : C'est plus !";
+        }
+        else if (nbProposition == nbMystere) {
+            indiceJeu.innerHTML = "Gagné ! Le nombre mystère est "+nbMystere+".";
+            reinit();
+        }
+
+        else if (nbTourReste < 0) {
+            indiceJeu.innerHTML = "Perdu ! La solution était " +nbMystere+".";
+            reinit();
+        }
+    }
+    
+    else {
+        indiceJeu.innerHTML = "C'est mal de tricher ! Il faut entrer un nombre.";         
+    }
+}

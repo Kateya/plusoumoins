@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Plus ou moins</title>
-    <script src="jeu.js"></script>  
 </head>
 <body>
-    <input type="button" value="Jouer !" onclick="deviner(nbTour);" name="" id="">
+    <div id="jeu">
+        <h1>Plus ou moins</h1>
+        <p id="regleJeu"></p>
+        <p id="indicesJeu"></p>
+        <input type="hidden" id="proposition" onKeyPress="if (event.keyCode == 13) deviner();">
+        <input type="button" value="Jouer !" onclick="modifForm();" id="startButton">
+        <input type="hidden" value="Entrer" onclick="deviner();" id="submitButton">
+    </div>
+    
+    <script src="jeu.js"></script>  
 </body>
 </html>
