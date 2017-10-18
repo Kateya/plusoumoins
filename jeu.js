@@ -1,31 +1,30 @@
 var nbMystere = Math.floor(Math.random()*100);
-var nbProposition;
-var verifNombre = Number.isNaN(nbProposition);
 var nbTour = 0;
 var nbTourReste = 10;
 
 function deviner(tours) {
+    var nbProposition;
     for (var i = 1; i<11; i++) {
-        var nbProposition = prompt('Devinez le nombre compris en 0 et 100 !'+' Tours restants : ' + nbTourReste);
+        nbProposition = prompt('Devinez le nombre compris en 0 et 100 !'+' Tours restants : ' + nbTourReste);
+        var verifNombre = isNaN(nbProposition);
+        nbTourReste = (10 - i);
+        console.log (verifNombre);
         if (verifNombre == false) {
-            if (nbProposition > nbMystere) {
+            if (nbProposition > nbMystere){
                 alert("C'est moins !");
-                nbTourReste = (10 - i);
             }
             else if (nbProposition < nbMystere){
                 alert("C'est plus !");
-                nbTourReste = (10 - i);
             }
             else if (nbProposition == nbMystere) {
-                alert("Gagné ! Le nombre mystère est "+nbMystere);
+                alert("Gagné ! Le nombre mystère est "+nbMystere+". Tu as trouvé en "+i+" tour(s).");
                 break;
-        }
-        else {
-            alert("C'est mal de tricher !");
-            nbTourReste = (10 - i);
             }
         }
         
+        else {
+            alert("C'est mal de tricher ! Il faut entrer un nombre.");         
+        }
     }        
 }
 
